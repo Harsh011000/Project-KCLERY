@@ -9,7 +9,7 @@ def-env activate-virtualenv [] {
     }
 
     let is_windows = ((sys).host.name | str downcase) == 'windows'
-    let virtual_env = 'D:\Python Projects\Project KCLERY\venv'
+    let virtual_env = 'D:\GitHub Repo\Project-KCLERY\venv'
     let bin = 'Scripts'
     let path_sep = ';'
     let path_name = if $is_windows {
@@ -89,4 +89,4 @@ def-env activate-virtualenv [] {
 activate-virtualenv
 
 alias pydoc = python -m pydoc
-alias deactivate = source 'D:\Python Projects\Project KCLERY\venv\Scripts\deactivate.nu'
+alias deactivate = source 'D:\GitHub Repo\Project-KCLERY\venv\Scripts\deactivate.nu'
