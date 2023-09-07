@@ -1,6 +1,5 @@
 import sys
-
-from PyQt5 import QtWidgets
+from PyQt5 import QtWidgets,uic
 from PyQt5.QtWidgets import QLabel, QSizePolicy
 
 from main_interface import Ui_MainWindow

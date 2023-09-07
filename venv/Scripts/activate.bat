@@ -1,4 +1,4 @@
-@set "VIRTUAL_ENV=D:\GitHub Repo\Project-KCLERY\venv"
+@set "VIRTUAL_ENV=D:\Python Projects\Project KCLERY\venv"
 
 @if defined _OLD_VIRTUAL_PROMPT (
     @set "PROMPT=%_OLD_VIRTUAL_PROMPT%"
