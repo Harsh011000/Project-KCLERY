@@ -23,42 +23,147 @@ class Ui_MainWindow(object):
         MainWindow.setMinimumSize(QtCore.QSize(1115, 708))
         MainWindow.setMaximumSize(QtCore.QSize(1115, 708))
         MainWindow.setSizeIncrement(QtCore.QSize(0, 0))
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(":/icons/Kclery_icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        MainWindow.setWindowIcon(icon)
+        MainWindow.setStyleSheet("\n"
+"QMainWindow {\n"
+"     background-image: url(:/Background/Untitled design.png);\n"
+"    background-repeat: no-repeat; /* Optional: Prevent image from repeating */\n"
+"    background-position: center; /* Optional: Center the image */\n"
+"}\n"
+"QScrollBar:vertical {\n"
+"    background: transparent;\n"
+"    width: 10px; /* Adjust the width of the scrollbar */\n"
+"}\n"
+"\n"
+"QScrollBar::handle:vertical {\n"
+"    background: blue; /* Scrollbar handle color */\n"
+"    border-radius: 5px;/* Rounded corners */\n"
+"}\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"QScrollBar::handle:vertical:hover {\n"
+"    background: #505050; /* Hovered color */\n"
+"}\n"
+"\n"
+"\n"
+"QScrollBar::handle:vertical:pressed {\n"
+"    background: #303030; /* Pressed color */\n"
+"}\n"
+"\n"
+"\n"
+"QScrollBar::sub-page:vertical {\n"
+"    background: transparent;\n"
+"}\n"
+"\n"
+"QScrollBar::add-page:vertical {\n"
+"    background: transparent;\n"
+"}\n"
+"\n"
+"\n"
+"QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {\n"
+"    height: 0;\n"
+"}\n"
+"\n"
+"QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {\n"
+"    width: 0;\n"
+"}\n"
+"\n"
+"\n"
+"QScrollBar::sub-line:vertical {\n"
+"    border: none;\n"
+"    background: transparent;\n"
+"}\n"
+"\n"
+"\n"
+"QScrollBar::sub-line:vertical:pressed {\n"
+"    background: transparent;\n"
+"}\n"
+"\n"
+"\n"
+"QScrollBar::add-line:vertical {\n"
+"    border: none;\n"
+"    background: transparent;\n"
+"}\n"
+"\n"
+"\n"
+"QScrollBar::add-line:vertical:pressed {\n"
+"    background: transparent;\n"
+"}\n"
+"\n"
+"")
+        MainWindow.setIconSize(QtCore.QSize(50, 30))
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.mic_button = QtWidgets.QPushButton(self.centralwidget)
-        self.mic_button.setGeometry(QtCore.QRect(860, 570, 41, 41))
+        self.mic_button.setGeometry(QtCore.QRect(850, 564, 51, 51))
+        self.mic_button.setStyleSheet("QPushButton {\n"
+"    border-radius: 25px; \n"
+"    background-color:rgb(170, 255, 255)\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #0056b3; /* Hover background color */\n"
+"}")
+        self.mic_button.setText("")
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap(":/icons/mic.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.mic_button.setIcon(icon1)
+        self.mic_button.setIconSize(QtCore.QSize(50, 50))
+        self.mic_button.setCheckable(False)
+        self.mic_button.setFlat(False)
         self.mic_button.setObjectName("mic_button")
         self.scrollArea = QtWidgets.QScrollArea(self.centralwidget)
         self.scrollArea.setGeometry(QtCore.QRect(140, 30, 711, 511))
         self.scrollArea.setMinimumSize(QtCore.QSize(711, 511))
+        self.scrollArea.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.scrollArea.setStyleSheet("")
+        self.scrollArea.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.scrollArea.setFrameShadow(QtWidgets.QFrame.Plain)
+        self.scrollArea.setLineWidth(0)
+        self.scrollArea.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 709, 509))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 711, 511))
+        self.scrollAreaWidgetContents.setStyleSheet("QWidget#scrollAreaWidgetContents {\n"
+"    background-image: url(:/Background/Untitled design.png);\n"
+"    /*background-repeat: no-repeat; /* Optional: Prevent image from repeating */\n"
+"   background-position: center; /* Optional: Center the image */\n"
+"}\n"
+"")
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents)
+        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout.setObjectName("verticalLayout")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout()
         self.verticalLayout_2.setObjectName("verticalLayout_2")
         self.verticalLayout.addLayout(self.verticalLayout_2)
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
-        self.search_place = QtWidgets.QPlainTextEdit(self.centralwidget)
-        self.search_place.setGeometry(QtCore.QRect(140, 560, 711, 61))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(1)
-        sizePolicy.setHeightForWidth(self.search_place.sizePolicy().hasHeightForWidth())
-        self.search_place.setSizePolicy(sizePolicy)
-        self.search_place.setSizeIncrement(QtCore.QSize(0, 1))
-        font = QtGui.QFont()
-        font.setFamily("HoloLens MDL2 Assets")
-        font.setPointSize(12)
-        font.setBold(False)
-        font.setWeight(50)
-        self.search_place.setFont(font)
-        self.search_place.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.search_place.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        self.search_place.setObjectName("search_place")
+        self.textEdit = QtWidgets.QTextEdit(self.centralwidget)
+        self.textEdit.setGeometry(QtCore.QRect(143, 550, 701, 81))
+        self.textEdit.viewport().setProperty("cursor", QtGui.QCursor(QtCore.Qt.IBeamCursor))
+        self.textEdit.setStyleSheet("QTextEdit#textEdit {\n"
+"    background-color: rgb(166, 166, 166);\n"
+"   \n"
+"    font: 12pt \"MS Shell Dlg 2\";\n"
+"   border: 1px solid; \n"
+"   border-radius:30px;\n"
+"   background-color:rgb(147, 147, 147);\n"
+"  \n"
+"   margin: 5px; /* Sets the margin around the QTextEdit */\n"
+"   padding: 5px; /* Sets the padding inside the QTextEdit */\n"
+"\n"
+"    \n"
+"   \n"
+"}\n"
+"\n"
+"")
+        self.textEdit.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.textEdit.setObjectName("textEdit")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 1115, 26))
@@ -73,6 +178,5 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.mic_button.setText(_translate("MainWindow", "PushButton"))
-        self.search_place.setPlainText(_translate("MainWindow", "fefeg"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "KCLERY"))
+import UI_elements_rc
