@@ -1,8 +1,8 @@
 import sys
 
-from PyQt5 import QtWidgets
-from PyQt5.QtCore import Qt, QTimer
-from PyQt5.QtWidgets import QLabel, QSizePolicy, QSpacerItem, QVBoxLayout, QFrame, QTextEdit
+from PyQt6 import QtWidgets
+from PyQt6.QtCore import Qt, QTimer
+from PyQt6.QtWidgets import QLabel, QSizePolicy, QSpacerItem, QVBoxLayout, QFrame, QTextEdit
 
 from main_interface import Ui_MainWindow
 
@@ -15,6 +15,115 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         #self.ui.setStyleSheet(self.ui.styleSheet())
         #self.cnt = 1
         #self.scrollArea.setStyleSheet()  # Change to your desired background color
+        # self.textEdit.setStyleSheet('''
+        #     QScrollBar:vertical {
+        #         background: transparent;
+        #         width: 10px; /* Adjust the width of the scrollbar */
+        #     }
+        #
+        #     QScrollBar::handle:vertical {
+        #         background: red; /* Scrollbar handle color */
+        #         border-radius: 5px; /* Rounded corners */
+        #     }
+        #
+        #     QScrollBar::handle:vertical:hover {
+        #         background: #505050; /* Hovered color */
+        #     }
+        #
+        #     QScrollBar::handle:vertical:pressed {
+        #         background: #303030; /* Pressed color */
+        #     }
+        #
+        #     QScrollBar::sub-page:vertical {
+        #         background: transparent;
+        #     }
+        #
+        #     QScrollBar::add-page:vertical {
+        #         background: transparent;
+        #     }
+        #
+        #     QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+        #         height: 0;
+        #     }
+        #
+        #     QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {
+        #         width: 0;
+        #     }
+        #
+        #     QScrollBar::sub-line:vertical {
+        #         border: none;
+        #         background: transparent;
+        #     }
+        #
+        #     QScrollBar::sub-line:vertical:pressed {
+        #         background: transparent;
+        #     }
+        #
+        #     QScrollBar::add-line:vertical {
+        #         border: none;
+        #         background: transparent;
+        #     }
+        #
+        #     QScrollBar::add-line:vertical:pressed {
+        #         background: transparent;
+        #     }
+        # ''')
+        #
+        # # Set the CSS styles for QScrollArea scrollbar
+        # self.scrollArea.setStyleSheet('''
+        #     QScrollBar:vertical {
+        #         background: transparent;
+        #         width: 10px; /* Adjust the width of the scrollbar */
+        #     }
+        #
+        #     QScrollBar::handle:vertical {
+        #         background: green; /* Scrollbar handle color */
+        #         border-radius: 5px; /* Rounded corners */
+        #     }
+        #
+        #     QScrollBar::handle:vertical:hover {
+        #         background: #505050; /* Hovered color */
+        #     }
+        #
+        #     QScrollBar::handle:vertical:pressed {
+        #         background: #303030; /* Pressed color */
+        #     }
+        #
+        #     QScrollBar::sub-page:vertical {
+        #         background: transparent;
+        #     }
+        #
+        #     QScrollBar::add-page:vertical {
+        #         background: transparent;
+        #     }
+        #
+        #     QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+        #         height: 0;
+        #     }
+        #
+        #     QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {
+        #         width: 0;
+        #     }
+        #
+        #     QScrollBar::sub-line:vertical {
+        #         border: none;
+        #         background: transparent;
+        #     }
+        #
+        #     QScrollBar::sub-line:vertical:pressed {
+        #         background: transparent;
+        #     }
+        #
+        #     QScrollBar::add-line:vertical {
+        #         border: none;
+        #         background: transparent;
+        #     }
+        #
+        #     QScrollBar::add-line:vertical:pressed {
+        #         background: transparent;
+        #     }
+        # ''')
+
 
 
 
@@ -28,8 +137,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         text_edit.setMaximumHeight(100)
         text_edit.setMaximumWidth(350)
         text_edit.setContentsMargins(1, 1, 1, 1)
-        text_edit.setFrameShape(QFrame.Box)
-        text_edit.setLayoutDirection(Qt.RightToLeft)
+        text_edit.setFrameShape(QFrame.Shape.Box)
+        text_edit.setLayoutDirection(Qt.LayoutDirection.RightToLeft)
         text_edit.setStyleSheet("QTextEdit {"
                                 "background-color: lightblue;"
                                 "border-radius: 10px;"
