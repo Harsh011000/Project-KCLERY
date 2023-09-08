@@ -35,20 +35,127 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>KCLERY</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="UI_elements.qrc">
+    <normaloff>:/icons/Kclery_icon.png</normaloff>:/icons/Kclery_icon.png</iconset>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">
+QMainWindow {
+ 	background-image: url(:/Background/Untitled design.png);
+    background-repeat: no-repeat; /* Optional: Prevent image from repeating */
+    background-position: center; /* Optional: Center the image */
+}
+QScrollBar:vertical {
+    background: transparent;
+    width: 10px; /* Adjust the width of the scrollbar */
+}
+
+QScrollBar::handle:vertical {
+    background: blue; /* Scrollbar handle color */
+    border-radius: 5px;/* Rounded corners */
+}
+
+
+
+
+
+QScrollBar::handle:vertical:hover {
+    background: #505050; /* Hovered color */
+}
+
+
+QScrollBar::handle:vertical:pressed {
+    background: #303030; /* Pressed color */
+}
+
+
+QScrollBar::sub-page:vertical {
+    background: transparent;
+}
+
+QScrollBar::add-page:vertical {
+    background: transparent;
+}
+
+
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+    height: 0;
+}
+
+QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {
+    width: 0;
+}
+
+
+QScrollBar::sub-line:vertical {
+    border: none;
+    background: transparent;
+}
+
+
+QScrollBar::sub-line:vertical:pressed {
+    background: transparent;
+}
+
+
+QScrollBar::add-line:vertical {
+    border: none;
+    background: transparent;
+}
+
+
+QScrollBar::add-line:vertical:pressed {
+    background: transparent;
+}
+
+</string>
+  </property>
+  <property name="iconSize">
+   <size>
+    <width>50</width>
+    <height>30</height>
+   </size>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QPushButton" name="mic_button">
     <property name="geometry">
      <rect>
-      <x>860</x>
-      <y>570</y>
-      <width>41</width>
-      <height>41</height>
+      <x>850</x>
+      <y>564</y>
+      <width>51</width>
+      <height>51</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    border-radius: 25px; 
+	background-color:rgb(170, 255, 255)
+}
+QPushButton:hover {
+    background-color: #0056b3; /* Hover background color */
+}</string>
+    </property>
     <property name="text">
-     <string>PushButton</string>
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="UI_elements.qrc">
+      <normaloff>:/icons/mic.png</normaloff>:/icons/mic.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>50</width>
+      <height>50</height>
+     </size>
+    </property>
+    <property name="checkable">
+     <bool>false</bool>
+    </property>
+    <property name="flat">
+     <bool>false</bool>
     </property>
    </widget>
    <widget class="QScrollArea" name="scrollArea">
@@ -66,6 +173,24 @@
       <height>511</height>
      </size>
     </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::NoFrame</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Plain</enum>
+    </property>
+    <property name="lineWidth">
+     <number>0</number>
+    </property>
+    <property name="horizontalScrollBarPolicy">
+     <enum>Qt::ScrollBarAlwaysOff</enum>
+    </property>
     <property name="widgetResizable">
      <bool>true</bool>
     </property>
@@ -74,54 +199,69 @@
       <rect>
        <x>0</x>
        <y>0</y>
-       <width>709</width>
-       <height>509</height>
+       <width>711</width>
+       <height>511</height>
       </rect>
      </property>
+     <property name="styleSheet">
+      <string notr="true">QWidget#scrollAreaWidgetContents {
+    background-image: url(:/Background/Untitled design.png);
+    /*background-repeat: no-repeat; /* Optional: Prevent image from repeating */
+   background-position: center; /* Optional: Center the image */
+}
+</string>
+     </property>
      <layout class="QVBoxLayout" name="verticalLayout">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_2"/>
       </item>
      </layout>
     </widget>
    </widget>
-   <widget class="QPlainTextEdit" name="search_place">
+   <widget class="QTextEdit" name="textEdit">
     <property name="geometry">
      <rect>
-      <x>140</x>
-      <y>560</y>
-      <width>711</width>
-      <height>61</height>
+      <x>143</x>
+      <y>550</y>
+      <width>701</width>
+      <height>81</height>
      </rect>
     </property>
-    <property name="sizePolicy">
-     <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
-      <horstretch>0</horstretch>
-      <verstretch>1</verstretch>
-     </sizepolicy>
+    <property name="cursor" stdset="0">
+     <cursorShape>IBeamCursor</cursorShape>
     </property>
-    <property name="sizeIncrement">
-     <size>
-      <width>0</width>
-      <height>1</height>
-     </size>
-    </property>
-    <property name="font">
-     <font>
-      <family>HoloLens MDL2 Assets</family>
-      <pointsize>12</pointsize>
-      <weight>50</weight>
-      <bold>false</bold>
-     </font>
-    </property>
-    <property name="frameShape">
-     <enum>QFrame::StyledPanel</enum>
+    <property name="styleSheet">
+     <string notr="true">QTextEdit#textEdit {
+	background-color: rgb(166, 166, 166);
+   
+	font: 12pt &quot;MS Shell Dlg 2&quot;;
+   border: 1px solid; 
+   border-radius:30px;
+   background-color:rgb(147, 147, 147);
+  
+   margin: 5px; /* Sets the margin around the QTextEdit */
+   padding: 5px; /* Sets the padding inside the QTextEdit */
+
+	
+   
+}
+
+</string>
     </property>
     <property name="horizontalScrollBarPolicy">
      <enum>Qt::ScrollBarAlwaysOff</enum>
-    </property>
-    <property name="plainText">
-     <string>fefeg</string>
     </property>
    </widget>
   </widget>
@@ -137,6 +277,8 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <resources/>
+ <resources>
+  <include location="UI_elements.qrc"/>
+ </resources>
  <connections/>
 </ui>
