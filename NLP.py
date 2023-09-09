@@ -25,8 +25,8 @@ def lang_process():
         text = "Sorry, an error occurred"
         print(f"Sorry, an error occurred: {e}")
 
-    arr = [True, text]
-    return arr
+    #arr = [True, text]
+    return text
 
 
 #lang_process()
