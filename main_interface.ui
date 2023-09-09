@@ -120,7 +120,7 @@ QPushButton:hover {
 }
 
 QScrollBar::handle:vertical {
-    background: blue; /* Scrollbar handle color */
+    background: lightblue; /* Scrollbar handle color */
     border-radius: 5px;/* Rounded corners */
 }
 
