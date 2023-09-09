@@ -1,4 +1,4 @@
-#Requirements  
+#Requirements Packages  
 PyQt6	V6.5.2  
 PyQt6-Qt6	V6.5.2  
 PyQt6-sip	V13.5.2  
@@ -20,4 +20,11 @@ Python V3.11
 To install all the above packages run the following commands in your terminal:-  
 pip install pyqt6  
 pip install pyqt6-tools  
-pip intsall pyside6
+pip intsall pyside6  
+PyAudio	V0.2.13  
+SpeechRecognition V3.10.0
+certifi	V2023.7.22  
+charset-normalizer V3.2.0  
+idna V3.4  
+requests V2.31.0  
+urllib3	V2.0.4  
