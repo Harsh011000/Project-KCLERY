@@ -6,10 +6,13 @@ def lang_process():
     recognizer = sr.Recognizer()
 
     # Capture audio from the microphone
-    with sr.Microphone() as source:
-        print("Say something...")
-        recognizer.adjust_for_ambient_noise(source, duration=0.2)
-        audio = recognizer.listen(source)
+    try:
+        with sr.Microphone() as source:
+            print("Say something...")
+            recognizer.adjust_for_ambient_noise(source, duration=0.2)
+            audio = recognizer.listen(source,timeout=5)
+    except:
+        print("error")
 
     # Recognize the speech using Google Web Speech API
 
