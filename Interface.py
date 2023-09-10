@@ -5,6 +5,7 @@ from PyQt6.QtCore import *
 from PyQt6.QtWidgets import QFrame, QTextEdit, QDialog
 
 import NLP as nlp
+import Ai_NLP as ai_nlp
 from dialog import Ui_Dialog
 from main_interface import Ui_MainWindow
 
@@ -17,8 +18,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.threadpool = QThreadPool()
 
     def addchat(self, obj=None, flag=0, text=None):
-        #print(self.dlg_val)
-        if self.dlg_val==0:
+        # print(self.dlg_val)
+        if self.dlg_val == 0:
             if (text == "Sorry, I could not understand your speech." or text == "Sorry, an error occurred"):
                 flag = 2
             if (flag == 0):
@@ -42,7 +43,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             text_edit.setStyleSheet("QTextEdit {"
                                     "background-color:" + color + ";"
                                                                   "border-radius: 10px;"
-    
+
                                                                   "}"
                                                                   """QScrollBar:vertical {
             background: transparent;
@@ -113,28 +114,46 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.verticalLayout_2.setSpacing(18)
             if obj != None and (flag == 0 or flag == 2):
                 obj.cls()
+            if flag == 0:
+                self.thread2(text)
 
     def scrblw(self):
         self.scrollArea.verticalScrollBar().setValue(self.scrollArea.verticalScrollBar().maximum())
 
     def opndlg(self):
         opn = dlg(self)
-        self.dlg_val=0
+        self.dlg_val = 0
         opn.finished.connect(self.close_dlg)
         QTimer.singleShot(50, lambda: self.thread(opn))
         opn.exec()
+
     def close_dlg(self):
-        self.dlg_val=1;
+        self.dlg_val = 1;
 
     def lp(self, arr):
-        #arr = nlp.lang_process()
-        #if arr[0]:
+        # arr = nlp.lang_process()
+        # if arr[0]:
         self.addchat(arr[0], 0, arr[1])
-    def thread(self,obj):
-        worker=Worker(obj)
+
+    def thread(self, obj):
+        worker = Worker(obj)
         worker.signal.finish.connect(self.lp)
         self.threadpool.start(worker)
 
+    def thread2(self, text):
+        worker2 = Worker2(text)
+        worker2.signal.finish.connect(self.get_ai_respo)
+        self.threadpool.start(worker2)
+
+    def get_ai_respo(self, arr):
+        if arr[0] == 1:
+            respo = ai_nlp.app_open_rspo(arr[1])
+            self.dlg_val = 0
+            if respo!="App not Found":
+                self.addchat(flag=1, text="Opening app "+respo)
+                QTimer.singleShot(2000,lambda :ai_nlp.opn_app(respo))
+            else:
+                self.addchat(flag=1, text=respo)
 
 
 class dlg(QDialog):
@@ -157,6 +176,19 @@ class Worker(QRunnable):
     def run(self):
         text = nlp.lang_process()
         arr = [self.obj, text]
+        self.signal.finish.emit(arr)
+
+
+class Worker2(QRunnable):
+    def __init__(self, text):
+        super().__init__()
+        self.text = text
+        self.signal = WorkerSignals()
+
+    @pyqtSlot()
+    def run(self):
+        arr = ai_nlp.response(self.text)
+        # arr = [self.obj, text]
         self.signal.finish.emit(arr)
 
 

@@ -24,9 +24,11 @@ charset-normalizer V3.2.0
 idna V3.4  
 requests V2.31.0  
 urllib3	V2.0.4  
+appopener V1.7
 To install all the above packages run the following commands in your terminal:-  
 pip install pyqt6  
 pip install pyqt6-tools  
 pip intsall pyside6  
 pip install pyaudio  
 pip install SpeechRecognition  
+pip install appopener
