@@ -123,8 +123,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def enter(self):
         text=self.extract_text()
-        self.dlg_val=0
-        self.addchat(flag=0,text=text)
+        if text!="":
+            self.dlg_val=0
+            self.addchat(flag=0,text=text)
     def extract_text(self):
         text=str(self.textEdit.toPlainText())
         self.textEdit.setPlainText("")
@@ -163,6 +164,15 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             if respo!="App not Found":
                 self.addchat(flag=1, text="Opening "+respo)
                 QTimer.singleShot(2000,lambda :ai_nlp.opn_app(respo))
+            else:
+                self.addchat(flag=1, text=respo)
+        if arr[0]==2:
+            respo=ai_nlp.app_close_rspo(arr[1])
+            self.dlg_val=0
+            if respo!="App not Found" and respo!= "App is already closed":
+                respotext=ai_nlp.crt_nm(respo)
+                self.addchat(flag=1, text="Closing "+respotext)
+                QTimer.singleShot(2000,lambda :ai_nlp.cls_app(respo))
             else:
                 self.addchat(flag=1, text=respo)
 

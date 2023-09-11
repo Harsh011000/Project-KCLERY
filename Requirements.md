@@ -31,4 +31,7 @@ pip install pyqt6-tools
 pip intsall pyside6  
 pip install pyaudio  
 pip install SpeechRecognition  
-pip install appopener
+pip install appopener  
+pip install psutil  
+pip install python-Levenshtein  
+pip install fuzzywuzzy
