@@ -35,11 +35,12 @@ stop_words = [
 ]
 apps = give_appnames()
 print(apps)
-flag = 0
+
 #open("discord", match_closest=True, output=False)
 
 
 def response(text):
+    flag=0
     arr = text.split(" ")
     for x in stop_words:
         if x in arr:
@@ -48,10 +49,11 @@ def response(text):
     print(arr)
     for y in App_keywords:
         if y in arr:
-            global flag
+
+            print(y+" "+str(flag))
             flag = 1
             break
-    print(flag)
+    print("Outer "+str(flag))
     text = ""
     for kl in arr:
         text += kl + " "
