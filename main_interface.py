@@ -225,6 +225,23 @@ class Ui_MainWindow(object):
 "")
         self.textEdit.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         self.textEdit.setObjectName("textEdit")
+        self.enter_button = QtWidgets.QPushButton(parent=self.centralwidget)
+        self.enter_button.setGeometry(QtCore.QRect(917, 564, 51, 51))
+        self.enter_button.setStyleSheet("QPushButton {\n"
+"    border-radius: 25px; \n"
+"    background-color:rgb(170, 255, 255)\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #0056b3; /* Hover background color */\n"
+"}")
+        self.enter_button.setText("")
+        icon2 = QtGui.QIcon()
+        icon2.addPixmap(QtGui.QPixmap(":/icons/arrow.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.enter_button.setIcon(icon2)
+        self.enter_button.setIconSize(QtCore.QSize(55, 55))
+        self.enter_button.setCheckable(False)
+        self.enter_button.setFlat(False)
+        self.enter_button.setObjectName("enter_button")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(parent=MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 1115, 22))
@@ -240,4 +257,5 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "KCLERY"))
+        self.enter_button.setShortcut(_translate("MainWindow", "Return"))
 import UI_elements_rc
