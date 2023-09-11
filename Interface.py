@@ -150,7 +150,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             respo = ai_nlp.app_open_rspo(arr[1])
             self.dlg_val = 0
             if respo!="App not Found":
-                self.addchat(flag=1, text="Opening app "+respo)
+                self.addchat(flag=1, text="Opening "+respo)
                 QTimer.singleShot(2000,lambda :ai_nlp.opn_app(respo))
             else:
                 self.addchat(flag=1, text=respo)
