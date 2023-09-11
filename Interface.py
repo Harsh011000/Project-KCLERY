@@ -15,6 +15,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         super(MainWindow, self).__init__(*args, **kwargs)
         self.setupUi(self)
         self.mic_button.clicked.connect(self.opndlg)
+        self.enter_button.clicked.connect(self.enter)
         self.threadpool = QThreadPool()
 
     def addchat(self, obj=None, flag=0, text=None):
@@ -119,6 +120,16 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def scrblw(self):
         self.scrollArea.verticalScrollBar().setValue(self.scrollArea.verticalScrollBar().maximum())
+
+    def enter(self):
+        text=self.extract_text()
+        self.dlg_val=0
+        self.addchat(flag=0,text=text)
+    def extract_text(self):
+        text=str(self.textEdit.toPlainText())
+        self.textEdit.setPlainText("")
+        return text
+
 
     def opndlg(self):
         opn = dlg(self)

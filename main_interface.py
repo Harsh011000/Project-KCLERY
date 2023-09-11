@@ -257,5 +257,5 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "KCLERY"))
-        self.enter_button.setShortcut(_translate("MainWindow", "Return"))
+        self.enter_button.setShortcut(_translate("MainWindow", "Ctrl+Return"))
 import UI_elements_rc
