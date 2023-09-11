@@ -359,7 +359,7 @@ QPushButton:hover {
      </size>
     </property>
     <property name="shortcut">
-     <string>Return</string>
+     <string>Ctrl+Return</string>
     </property>
     <property name="checkable">
      <bool>false</bool>
