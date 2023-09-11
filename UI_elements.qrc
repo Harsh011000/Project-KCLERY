@@ -6,5 +6,6 @@
   <qresource prefix="icons">
     <file>mic.png</file>
     <file>Kclery_icon.png</file>
+    <file>arrow.png</file>
   </qresource>
 </RCC>
