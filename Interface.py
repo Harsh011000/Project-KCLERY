@@ -169,12 +169,20 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         if arr[0]==2:
             respo=ai_nlp.app_close_rspo(arr[1])
             self.dlg_val=0
-            if respo!="App not Found" and respo!= "App is already closed":
+            if respo!="App not Found" :#and respo!= "App is already closed":
                 respotext=ai_nlp.crt_nm(respo)
-                self.addchat(flag=1, text="Closing "+respotext)
-                QTimer.singleShot(2000,lambda :ai_nlp.cls_app(respo))
+                self.addchat(flag=1, text="Closing "+respo)
+                QTimer.singleShot(2000,lambda :ai_nlp.cls_app(respotext))
             else:
                 self.addchat(flag=1, text=respo)
+        if arr[0]==3:
+            respo=ai_nlp.dirct_rspo(arr[1])
+            self.dlg_val=0
+            if respo!="Disk/Drive not found":
+                self.addchat(flag=1,text="Opening dir "+respo)
+                QTimer.singleShot(2000,lambda :ai_nlp.opn_dir(respo))
+            else:
+                self.addchat(flag=1,text=respo)
 
 
 class dlg(QDialog):
