@@ -78,6 +78,11 @@ g_dir=[]
 
 def response(text):
     flag=0
+    if os.path.isdir(text):
+        flag=3
+        array=[flag,text]
+        print("yaaaaaaaaaaaaaaaaaaaaaaaa")
+        return array
     arr = text.split(" ")
     for x in stop_words:
         if x in arr:
@@ -118,6 +123,9 @@ def response(text):
 def dirct_rspo(text):
     global abs_path
     path=""
+    if os.path.isdir(text):
+        abs_path=text
+        return abs_path
     for drive in drive_list:
         if fuzz.partial_ratio(drive,text)>=90:
             tmp=drive.split(" ")
