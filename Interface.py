@@ -123,6 +123,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def enter(self):
         text=self.extract_text()
+        text=text.lower()
         if text!="":
             self.dlg_val=0
             self.addchat(flag=0,text=text)
@@ -183,6 +184,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 QTimer.singleShot(2000,lambda :ai_nlp.opn_dir(respo))
             else:
                 self.addchat(flag=1,text=respo)
+        if arr[0]==5:
+            respo=ai_nlp.cust_set(arr[1])
+            self.dlg_val=0
+            self.addchat(flag=1,text="Setting Custom command:-\n"+respo)
 
 
 class dlg(QDialog):
