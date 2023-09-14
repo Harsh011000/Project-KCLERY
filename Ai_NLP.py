@@ -2,6 +2,8 @@ import psutil
 from AppOpener import *
 from fuzzywuzzy import fuzz
 import os
+import difflib
+import pandas as pd
 
 
 Open_keywords = [
@@ -72,23 +74,36 @@ drive_list=[ 'drive c', 'drive d', 'drive e', 'drive f', 'drive g', 'drive h', '
 
 abs_path=""
 g_dir=[]
+username=os.environ.get("USERNAME")
+custom_dir={"documents":"C:\\Users\\"+username+"\\documents","pictures":"C:\\Users\\"+username+"\\pictures","downloads":"C:\\Users\\"+username+"\\downloads","music":"C:\\Users\\"+username+"\\music","viedos":"C:\\Users\\"+username+"\\viedos","desktop":"C:\\Users\\"+username+"\\desktop"}
 
 #open("discord", match_closest=True, output=False)
 
 
 def response(text):
     flag=0
+    text=check_for_cust_comm(text)
     if os.path.isdir(text):
         flag=3
         array=[flag,text]
         print("yaaaaaaaaaaaaaaaaaaaaaaaa")
         return array
     arr = text.split(" ")
+    if arr[0]=="set" and (arr[2]=="=" or arr[2]=="equal" or arr[2]=="equals"):
+        flag=5
+        array=[flag,text]
+        return array
     for x in stop_words:
         if x in arr:
             # text=text.replace(x,"")
             arr = [yy for yy in arr if yy != x]
     print(arr)
+    for chk in custom_dir:
+        found=difflib.get_close_matches(chk, arr, n=1, cutoff=0.85)
+        if found:
+            flag=3
+            array=[flag,custom_dir[chk]]
+            return array
     text = ""
     for kll in arr:
         text += kll + " "
@@ -120,12 +135,61 @@ def response(text):
     return respo
 
 
+def check_for_cust_comm(text):
+    if len(text.split(" "))==1:
+
+        # flag=6
+        # array=[flag,text]
+        # return array
+        text=use_cust_comm(text)
+        print("Command = "+text)
+        return text
+    else:
+        return text
+def use_cust_comm(key):
+    try:
+        df=pd.read_csv("Custom Commands.csv")
+        print(df)
+        key_df=df[df["Custom key"]==key]
+        command=key_df["Command"].values[0]
+        if command!=None and command!="":
+            return command
+        else:
+            return key
+    except:
+        return key
+def cust_set(text):
+    arr=text.split(" ")
+    key=arr[1]
+    work=""
+    for x in range(3,len(arr)):
+        work+=arr[x]+" "
+    set_file(key,work.strip())
+    return key+":"+work.strip()
+
+def set_file(key,work):
+    data={"Custom key":[key],
+          "Command":[work]}
+    df=pd.DataFrame(data)
+    file_name="Custom Commands.csv"
+    if os.path.exists(file_name):
+        #df.to_csv(file_name,mode="a",header=False,index=False)
+        dff=pd.read_csv(file_name)
+        key_mask=dff["Custom key"]==key
+        if key_mask.any():
+            dff.loc[key_mask,"Command"]=work
+            dff.to_csv(file_name,mode="w",header=True,index=False)
+        else:
+            df.to_csv(file_name,mode="a",header=False,index=False)
+    else:
+        df.to_csv(file_name, mode="a", header=True, index=False)
 def dirct_rspo(text):
     global abs_path
     path=""
     if os.path.isdir(text):
         abs_path=text
         return abs_path
+
     for drive in drive_list:
         if fuzz.partial_ratio(drive,text)>=90:
             tmp=drive.split(" ")
@@ -181,7 +245,7 @@ def dir_con(path,text):
         dirct.append(x.lower())
     print("dir= ",dirct)
     for nm in dirct:
-        if fuzz.partial_ratio(nm,text)>=85:
+        if fuzz.partial_ratio(nm,text)>=87:
             print("nm =",nm,"dir 2=",dirct)
             path+=nm+"\\"
             abs_path+=nm+"\\"
@@ -311,3 +375,4 @@ def crt_nm(text):
 #
 #         except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
 #             pass
+#print(os.path.exists("dialogu.ui"))
