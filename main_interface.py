@@ -12,14 +12,14 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1115, 708)
+        MainWindow.resize(930, 615)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(MainWindow.sizePolicy().hasHeightForWidth())
         MainWindow.setSizePolicy(sizePolicy)
-        MainWindow.setMinimumSize(QtCore.QSize(1115, 708))
-        MainWindow.setMaximumSize(QtCore.QSize(1115, 708))
+        MainWindow.setMinimumSize(QtCore.QSize(930, 615))
+        MainWindow.setMaximumSize(QtCore.QSize(930, 615))
         MainWindow.setSizeIncrement(QtCore.QSize(0, 0))
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(":/icons/Kclery_icon.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
@@ -35,7 +35,7 @@ class Ui_MainWindow(object):
         self.centralwidget = QtWidgets.QWidget(parent=MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.mic_button = QtWidgets.QPushButton(parent=self.centralwidget)
-        self.mic_button.setGeometry(QtCore.QRect(850, 564, 51, 51))
+        self.mic_button.setGeometry(QtCore.QRect(799, 476, 51, 51))
         self.mic_button.setStyleSheet("QPushButton {\n"
 "    border-radius: 25px; \n"
 "    background-color:rgb(170, 255, 255)\n"
@@ -52,8 +52,7 @@ class Ui_MainWindow(object):
         self.mic_button.setFlat(False)
         self.mic_button.setObjectName("mic_button")
         self.scrollArea = QtWidgets.QScrollArea(parent=self.centralwidget)
-        self.scrollArea.setGeometry(QtCore.QRect(140, 30, 711, 511))
-        self.scrollArea.setMinimumSize(QtCore.QSize(711, 511))
+        self.scrollArea.setGeometry(QtCore.QRect(90, 20, 711, 421))
         self.scrollArea.setLayoutDirection(QtCore.Qt.LayoutDirection.LeftToRight)
         self.scrollArea.setStyleSheet("QScrollBar:vertical {\n"
 "    background: transparent;\n"
@@ -125,7 +124,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 711, 511))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 711, 421))
         self.scrollAreaWidgetContents.setStyleSheet("QWidget#scrollAreaWidgetContents {\n"
 "    background-image: url(:/Background/Untitled design.png);\n"
 "    /*background-repeat: no-repeat; /* Optional: Prevent image from repeating */\n"
@@ -141,7 +140,7 @@ class Ui_MainWindow(object):
         self.verticalLayout.addLayout(self.verticalLayout_2)
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
         self.textEdit = QtWidgets.QTextEdit(parent=self.centralwidget)
-        self.textEdit.setGeometry(QtCore.QRect(143, 550, 701, 81))
+        self.textEdit.setGeometry(QtCore.QRect(90, 460, 701, 81))
         self.textEdit.viewport().setProperty("cursor", QtGui.QCursor(QtCore.Qt.CursorShape.IBeamCursor))
         self.textEdit.setStyleSheet("QTextEdit {\n"
 "    background-color: rgb(166, 166, 166);\n"
@@ -226,7 +225,7 @@ class Ui_MainWindow(object):
         self.textEdit.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         self.textEdit.setObjectName("textEdit")
         self.enter_button = QtWidgets.QPushButton(parent=self.centralwidget)
-        self.enter_button.setGeometry(QtCore.QRect(917, 564, 51, 51))
+        self.enter_button.setGeometry(QtCore.QRect(856, 476, 51, 51))
         self.enter_button.setStyleSheet("QPushButton {\n"
 "    border-radius: 25px; \n"
 "    background-color:rgb(170, 255, 255)\n"
@@ -242,9 +241,23 @@ class Ui_MainWindow(object):
         self.enter_button.setCheckable(False)
         self.enter_button.setFlat(False)
         self.enter_button.setObjectName("enter_button")
+        self.music_button = QtWidgets.QPushButton(parent=self.centralwidget)
+        self.music_button.setGeometry(QtCore.QRect(32, 476, 51, 51))
+        self.music_button.setStyleSheet("QPushButton {\n"
+"    border-radius: 25px; \n"
+"    background-color:rgb(170, 255, 255)\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #0056b3; /* Hover background color */\n"
+"}")
+        icon3 = QtGui.QIcon()
+        icon3.addPixmap(QtGui.QPixmap(":/icons/music.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.music_button.setIcon(icon3)
+        self.music_button.setIconSize(QtCore.QSize(50, 50))
+        self.music_button.setObjectName("music_button")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(parent=MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 1115, 22))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 930, 22))
         self.menubar.setObjectName("menubar")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(parent=MainWindow)

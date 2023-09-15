@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1115</width>
-    <height>708</height>
+    <width>930</width>
+    <height>615</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -18,14 +18,14 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>1115</width>
-    <height>708</height>
+    <width>930</width>
+    <height>615</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>1115</width>
-    <height>708</height>
+    <width>930</width>
+    <height>615</height>
    </size>
   </property>
   <property name="sizeIncrement">
@@ -60,8 +60,8 @@ QMainWindow {
    <widget class="QPushButton" name="mic_button">
     <property name="geometry">
      <rect>
-      <x>850</x>
-      <y>564</y>
+      <x>799</x>
+      <y>476</y>
       <width>51</width>
       <height>51</height>
      </rect>
@@ -98,17 +98,11 @@ QPushButton:hover {
    <widget class="QScrollArea" name="scrollArea">
     <property name="geometry">
      <rect>
-      <x>140</x>
-      <y>30</y>
+      <x>90</x>
+      <y>20</y>
       <width>711</width>
-      <height>511</height>
+      <height>421</height>
      </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>711</width>
-      <height>511</height>
-     </size>
     </property>
     <property name="layoutDirection">
      <enum>Qt::LeftToRight</enum>
@@ -199,7 +193,7 @@ QScrollBar::add-line:vertical:pressed {
        <x>0</x>
        <y>0</y>
        <width>711</width>
-       <height>511</height>
+       <height>421</height>
       </rect>
      </property>
      <property name="styleSheet">
@@ -232,8 +226,8 @@ QScrollBar::add-line:vertical:pressed {
    <widget class="QTextEdit" name="textEdit">
     <property name="geometry">
      <rect>
-      <x>143</x>
-      <y>550</y>
+      <x>90</x>
+      <y>460</y>
       <width>701</width>
       <height>81</height>
      </rect>
@@ -330,8 +324,8 @@ QScrollBar::add-line:vertical:pressed {
    <widget class="QPushButton" name="enter_button">
     <property name="geometry">
      <rect>
-      <x>917</x>
-      <y>564</y>
+      <x>856</x>
+      <y>476</y>
       <width>51</width>
       <height>51</height>
      </rect>
@@ -368,13 +362,42 @@ QPushButton:hover {
      <bool>false</bool>
     </property>
    </widget>
+   <widget class="QPushButton" name="music_button">
+    <property name="geometry">
+     <rect>
+      <x>32</x>
+      <y>476</y>
+      <width>51</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    border-radius: 25px; 
+	background-color:rgb(170, 255, 255)
+}
+QPushButton:hover {
+    background-color: #0056b3; /* Hover background color */
+}</string>
+    </property>
+    <property name="icon">
+     <iconset resource="UI_elements.qrc">
+      <normaloff>:/icons/music.png</normaloff>:/icons/music.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>50</width>
+      <height>50</height>
+     </size>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1115</width>
+     <width>930</width>
      <height>22</height>
     </rect>
    </property>

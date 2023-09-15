@@ -19,7 +19,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.threadpool = QThreadPool()
 
     def addchat(self, obj=None, flag=0, text=None):
-        # print(self.dlg_val)
+
         if self.dlg_val == 0:
             if (text == "Sorry, I could not understand your speech." or text == "Sorry, an error occurred"):
                 flag = 2
@@ -144,8 +144,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.dlg_val = 1;
 
     def lp(self, arr):
-        # arr = nlp.lang_process()
-        # if arr[0]:
+
         self.addchat(arr[0], 0, arr[1])
 
     def thread(self, obj):
@@ -170,7 +169,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         if arr[0]==2:
             respo=ai_nlp.app_close_rspo(arr[1])
             self.dlg_val=0
-            if respo!="App not Found" :#and respo!= "App is already closed":
+            if respo!="App not Found" :
                 respotext=ai_nlp.crt_nm(respo)
                 self.addchat(flag=1, text="Closing "+respo)
                 QTimer.singleShot(2000,lambda :ai_nlp.cls_app(respotext))
@@ -222,7 +221,7 @@ class Worker2(QRunnable):
     @pyqtSlot()
     def run(self):
         arr = ai_nlp.response(self.text)
-        # arr = [self.obj, text]
+
         self.signal.finish.emit(arr)
 
 

@@ -1,10 +1,8 @@
-import psutil
 from AppOpener import *
 from fuzzywuzzy import fuzz
 import os
 import difflib
 import pandas as pd
-
 
 Open_keywords = [
     "open",
@@ -61,48 +59,56 @@ stop_words = [
     "an",
     "the"
 ]
-close_dict={"google chrome":"chrome","microsoft store":"winstore.app","settings":"systemsettings","microsoft office":"webviewhost","task manager":"taskmgr"}
-#rev_close_dict={'chrome': 'google chrome', 'winstore.app': 'microsoft store', 'systemsettings': 'settings'}
-list_val=list(close_dict.values())
+close_dict = {"google chrome": "chrome", "microsoft store": "winstore.app", "settings": "systemsettings",
+              "microsoft office": "webviewhost", "task manager": "taskmgr"}
+
+list_val = list(close_dict.values())
 apps = give_appnames()
-#print(apps)
-drive_list=[ 'drive c', 'drive d', 'drive e', 'drive f', 'drive g', 'drive h', 'drive i', 'drive j', 'drive k', 'drive l', 'drive m', 'drive n', 'drive o', 'drive p', 'drive q', 'drive r', 'drive s', 'drive t', 'drive u', 'drive v', 'drive w', 'drive x', 'drive y', 'drive z'
-    , 'c drive', 'd drive', 'e drive', 'f drive', 'g drive', 'h drive', 'i drive', 'j drive', 'k drive', 'l drive', 'm drive', 'n drive', 'o drive', 'p drive', 'q drive', 'r drive', 's drive', 't drive', 'u drive', 'v drive', 'w drive', 'x drive', 'y drive', 'z drive',
-             'disk c', 'disk d', 'disk e', 'disk f', 'disk g', 'disk h', 'disk i', 'disk j', 'disk k', 'disk l', 'disk m', 'disk n', 'disk o', 'disk p', 'disk q', 'disk r', 'disk s', 'disk t', 'disk u', 'disk v', 'disk w', 'disk x', 'disk y', 'disk z',
-             'c disk', 'd disk', 'e disk', 'f disk', 'g disk', 'h disk', 'i disk', 'j disk', 'k disk', 'l disk', 'm disk', 'n disk', 'o disk', 'p disk', 'q disk', 'r disk', 's disk', 't disk', 'u disk', 'v disk', 'w disk', 'x disk', 'y disk', 'z disk']
 
+drive_list = ['drive c', 'drive d', 'drive e', 'drive f', 'drive g', 'drive h', 'drive i', 'drive j', 'drive k',
+              'drive l', 'drive m', 'drive n', 'drive o', 'drive p', 'drive q', 'drive r', 'drive s', 'drive t',
+              'drive u', 'drive v', 'drive w', 'drive x', 'drive y', 'drive z'
+    , 'c drive', 'd drive', 'e drive', 'f drive', 'g drive', 'h drive', 'i drive', 'j drive', 'k drive', 'l drive',
+              'm drive', 'n drive', 'o drive', 'p drive', 'q drive', 'r drive', 's drive', 't drive', 'u drive',
+              'v drive', 'w drive', 'x drive', 'y drive', 'z drive',
+              'disk c', 'disk d', 'disk e', 'disk f', 'disk g', 'disk h', 'disk i', 'disk j', 'disk k', 'disk l',
+              'disk m', 'disk n', 'disk o', 'disk p', 'disk q', 'disk r', 'disk s', 'disk t', 'disk u', 'disk v',
+              'disk w', 'disk x', 'disk y', 'disk z',
+              'c disk', 'd disk', 'e disk', 'f disk', 'g disk', 'h disk', 'i disk', 'j disk', 'k disk', 'l disk',
+              'm disk', 'n disk', 'o disk', 'p disk', 'q disk', 'r disk', 's disk', 't disk', 'u disk', 'v disk',
+              'w disk', 'x disk', 'y disk', 'z disk']
 
-abs_path=""
-g_dir=[]
-username=os.environ.get("USERNAME")
-custom_dir={"documents":"C:\\Users\\"+username+"\\documents","pictures":"C:\\Users\\"+username+"\\pictures","downloads":"C:\\Users\\"+username+"\\downloads","music":"C:\\Users\\"+username+"\\music","viedos":"C:\\Users\\"+username+"\\viedos","desktop":"C:\\Users\\"+username+"\\desktop"}
-
-#open("discord", match_closest=True, output=False)
+abs_path = ""
+g_dir = []
+username = os.environ.get("USERNAME")
+custom_dir = {"documents": "C:\\Users\\" + username + "\\documents",
+              "pictures": "C:\\Users\\" + username + "\\pictures",
+              "downloads": "C:\\Users\\" + username + "\\downloads", "music": "C:\\Users\\" + username + "\\music",
+              "viedos": "C:\\Users\\" + username + "\\viedos", "desktop": "C:\\Users\\" + username + "\\desktop"}
 
 
 def response(text):
-    flag=0
-    text=check_for_cust_comm(text)
+    flag = 0
+    text = single_line(text)
+    text = check_for_cust_comm(text)
     if os.path.isdir(text):
-        flag=3
-        array=[flag,text]
-        print("yaaaaaaaaaaaaaaaaaaaaaaaa")
+        flag = 3
+        array = [flag, text]
         return array
     arr = text.split(" ")
-    if arr[0]=="set" and (arr[2]=="=" or arr[2]=="equal" or arr[2]=="equals"):
-        flag=5
-        array=[flag,text]
+    if arr[0] == "set" and (arr[2] == "=" or arr[2] == "equal" or arr[2] == "equals"):
+        flag = 5
+        array = [flag, text]
         return array
     for x in stop_words:
         if x in arr:
-            # text=text.replace(x,"")
             arr = [yy for yy in arr if yy != x]
-    print(arr)
+
     for chk in custom_dir:
-        found=difflib.get_close_matches(chk, arr, n=1, cutoff=0.85)
+        found = difflib.get_close_matches(chk, arr, n=1, cutoff=0.85)
         if found:
-            flag=3
-            array=[flag,custom_dir[chk]]
+            flag = 3
+            array = [flag, custom_dir[chk]]
             return array
     text = ""
     for kll in arr:
@@ -110,118 +116,123 @@ def response(text):
     text = text.strip()
     for dr in drive_list:
         if dr in text:
-            flag=3
-            arr2=[flag,text]
-            print("arr2 printing ",arr2)
+            flag = 3
+            arr2 = [flag, text]
+
             return arr2
     for y in Open_keywords:
         if y in arr:
-
-            print(y+" "+str(flag))
             flag = 1
             break
     for y in close_keywords:
         if y in arr:
-
-            print(y+" "+str(flag))
             flag = 2
             break
-    print("Outer "+str(flag))
+
     text = ""
     for kl in arr:
         text += kl + " "
     text = text.strip()
-    respo=[flag,text]
+    respo = [flag, text]
     return respo
 
 
 def check_for_cust_comm(text):
-    if len(text.split(" "))==1:
+    if len(text.split(" ")) == 1:
 
-        # flag=6
-        # array=[flag,text]
-        # return array
-        text=use_cust_comm(text)
-        print("Command = "+text)
+        text = use_cust_comm(text)
+
         return text
     else:
         return text
+
+
+def single_line(text):
+    arr = text.split("\n")
+    string = ""
+    for x in arr:
+        string += x + " "
+    return string.strip()
+
+
 def use_cust_comm(key):
     try:
-        df=pd.read_csv("Custom Commands.csv")
-        print(df)
-        key_df=df[df["Custom key"]==key]
-        command=key_df["Command"].values[0]
-        if command!=None and command!="":
+        df = pd.read_csv("Custom Commands.csv")
+
+        key_df = df[df["Custom key"] == key]
+        command = key_df["Command"].values[0]
+        if command is not None and command != "":
             return command
         else:
             return key
     except:
         return key
-def cust_set(text):
-    arr=text.split(" ")
-    key=arr[1]
-    work=""
-    for x in range(3,len(arr)):
-        work+=arr[x]+" "
-    set_file(key,work.strip())
-    return key+":"+work.strip()
 
-def set_file(key,work):
-    data={"Custom key":[key],
-          "Command":[work]}
-    df=pd.DataFrame(data)
-    file_name="Custom Commands.csv"
+
+def cust_set(text):
+    arr = text.split(" ")
+    key = arr[1]
+    work = ""
+    for x in range(3, len(arr)):
+        work += arr[x] + " "
+    set_file(key, work.strip())
+    return key + ":" + work.strip()
+
+
+def set_file(key, work):
+    data = {"Custom key": [key],
+            "Command": [work]}
+    df = pd.DataFrame(data)
+    file_name = "Custom Commands.csv"
     if os.path.exists(file_name):
-        #df.to_csv(file_name,mode="a",header=False,index=False)
-        dff=pd.read_csv(file_name)
-        key_mask=dff["Custom key"]==key
+
+        dff = pd.read_csv(file_name)
+        key_mask = dff["Custom key"] == key
         if key_mask.any():
-            dff.loc[key_mask,"Command"]=work
-            dff.to_csv(file_name,mode="w",header=True,index=False)
+            dff.loc[key_mask, "Command"] = work
+            dff.to_csv(file_name, mode="w", header=True, index=False)
         else:
-            df.to_csv(file_name,mode="a",header=False,index=False)
+            df.to_csv(file_name, mode="a", header=False, index=False)
     else:
         df.to_csv(file_name, mode="a", header=True, index=False)
+
+
 def dirct_rspo(text):
     global abs_path
-    path=""
+    path = ""
     if os.path.isdir(text):
-        abs_path=text
+        abs_path = text
         return abs_path
 
     for drive in drive_list:
-        if fuzz.partial_ratio(drive,text)>=90:
-            tmp=drive.split(" ")
-            print("tmp printing ",tmp)
-            if len(tmp[0])==1:
-                print("printing before try ",tmp[0])
+        if fuzz.partial_ratio(drive, text) >= 90:
+            tmp = drive.split(" ")
+
+            if len(tmp[0]) == 1:
 
                 try:
-                    tomp = os.listdir(tmp[0]+":\\")
-                    #print("correct")
+                    tomp = os.listdir(tmp[0] + ":\\")
+
                     path = tmp[0] + ":\\"
                     abs_path = tmp[0] + ":\\"
-                    print("correct ", path," tmp 0 ",tmp[0])
+
                     break
                 except:
-                    print("eception1")
-                # path=tmp[0]+":\\"
-                # abs_path=tmp[0]+":\\"
-                # break
+                    pass
+
             else:
                 try:
                     tomp = os.listdir(tmp[1] + ":\\")
-                    #print("correct")
+
                     path = tmp[1] + ":\\"
                     abs_path = tmp[1] + ":\\"
-                    print("correct ",path)
+
                     break
                 except:
-                    print("eception1")
-    print("path 0 ",path)
-    tmp=dir_con(path,text)
-    if abs_path!="":
+                    pass
+
+    tmp = dir_con(path, text)
+    if abs_path != "":
         return abs_path
     else:
         return "Disk/Drive not found"
@@ -229,150 +240,85 @@ def dirct_rspo(text):
 
 def opn_dir(path):
     os.startfile(os.path.realpath(path))
-def dir_con(path,text):
+
+
+def dir_con(path, text):
     global abs_path
     global g_dir
-    print("path =",path)
+
     try:
-        g_dir=os.listdir(path)
-        print("correct 2")
+        g_dir = os.listdir(path)
+
     except:
-        abs_path=""
-        print("eception 2")
+        abs_path = ""
+
         return path
-    dirct=[]
+    dirct = []
     for x in g_dir:
         dirct.append(x.lower())
-    print("dir= ",dirct)
+
     for nm in dirct:
-        if fuzz.partial_ratio(nm,text)>=87:
-            print("nm =",nm,"dir 2=",dirct)
-            path+=nm+"\\"
-            abs_path+=nm+"\\"
-            print("printing = ",path)
-            print("++1")
-            dir_con(path,text)
-    #return path
+        if fuzz.partial_ratio(nm, text) >= 87:
+            path += nm + "\\"
+            abs_path += nm + "\\"
+
+            dir_con(path, text)
+
 
 def app_close_rspo(text):
     arr = []
-    # arr2=[]
-    # cnt=0
-    # for z in apps:
-    #     if z in text:
-    #         arr.append(z)
+
     for z in apps:
-        if fuzz.partial_ratio(z,text)>=83:
+        if fuzz.partial_ratio(z, text) >= 83:
             arr.append(z)
-    if len(arr)!=0:
-        #app_name = app_name.lower()
-        # for window in gw.getAllTitles():
-        #     for app in arr:
-        #         print(str(window.title()).lower())
-        #         if str(window.title()).lower() == app:
-        #             arr2.append(app)
-        #             cnt+=1
-        #             break
-        #     if cnt>=len(arr):
-        #         break
-        # print("printing arr ",arr)
-        # for process in psutil.process_iter(attrs=['name']):
-        #     for app in arr:
-        #         try:
-        #             process_name = str(process.info['name'])
-        #             #print(process_name)
-        #             if app in close_dict:
-        #                 app=close_dict[app]
-        #             if process_name.lower() == app+".exe":
-        #                 # if app in list_val:
-        #                 #     app=rev_close_dict[app]
-        #                 arr2.append(app)
-        #                 cnt+=1
-        #                 break
-        #         except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
-        #             pass
-        #     if cnt >= len(arr):
-        #          break
-        # print("printing arr2 ",arr2)
-        #if len(arr2)!=0:
-            string = ""
-            for o in arr:
-                string += o + ","
-                print(string)
-            string = string[:-1]
-            print(string)
-            return string
-        # else:
-        #     return "App is already closed"
-    else:
-        return "App not Found"
-def app_open_rspo(text):
-    arr = []
-    # for z in apps:
-    #     if z in text:
-    #         arr.append(z)
-    for z in apps:
-        if fuzz.partial_ratio(z,text)>=83:
-            arr.append(z)
-    if len(arr)!=0:
+    if len(arr) != 0:
+
         string = ""
         for o in arr:
             string += o + ","
-            print(string)
+
         string = string[:-1]
-        print(string)
+
+        return string
+
+    else:
+        return "App not Found"
+
+
+def app_open_rspo(text):
+    arr = []
+
+    for z in apps:
+        if fuzz.partial_ratio(z, text) >= 83:
+            arr.append(z)
+    if len(arr) != 0:
+        string = ""
+        for o in arr:
+            string += o + ","
+
+        string = string[:-1]
+
         return string
     else:
         return "App not Found"
-    #open(string, match_closest=True, output=False)
+
 
 def opn_app(text):
-    open(text, match_closest=True, output=True)
-    #print(hh)
+    open(text, match_closest=True, output=False)
+
+
 def cls_app(text):
-    print("closing..........................................",text)
-    close(text,match_closest=True,output=True)
+    close(text, match_closest=True, output=False)
+
+
 def crt_nm(text):
-    array=text.split(",")
-    string=""
-    print(array)
+    array = text.split(",")
+    string = ""
+
     for x in array:
         if x in close_dict:
-            string+=close_dict[x]+","
+            string += close_dict[x] + ","
         else:
-            string+=x+","
-    string=string[:-1]
+            string += x + ","
+    string = string[:-1]
     return string
-
-
-#response("hey can you open the app discord,proton vpn")
-# happen("hey can you open the app discord")
-#open("open whatsapp and discord", match_closest=True, output=True)
-#cls_app("netflix")
-#close('microsoft store',match_closest=True,output=True,throw_error=True)
-# for window in gw.getAllTitles():
-#     # for app in arr:
-#     #     if window.title.lower() == app:
-#     #         arr2.append(app)
-#     #         cnt += 1
-#     #         break
-#     # if cnt >= len(arr):
-#     #     break
-#     print(str(window.title()).lower())
-#close("winstore",match_closest=True,output=True)
-#os.startfile(os.path.realpath(r"d:\\zz\\loop (86)"))
-# print(os.environ.get("USERNAME"))
-
-# print(dir)
-# tm=dir_con("d:\\","open ptw spy classrooms in movies folder")
-# print("abs path ",abs_path)
-#close("explorer.exe",match_closest=True,output=True)
-# for process in psutil.process_iter(attrs=['name']):
-#
-#         try:
-#             process_name = str(process.info['name'])
-#             print(process_name)
-#
-#         except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
-#             pass
-#print(os.path.exists("dialogu.ui"))
