@@ -4,6 +4,7 @@
     <file>background.png</file>
   </qresource>
   <qresource prefix="icons">
+    <file>music.png</file>
     <file>mic.png</file>
     <file>Kclery_icon.png</file>
     <file>arrow.png</file>
