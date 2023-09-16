@@ -1,4 +1,4 @@
-#Requirements Packages  
+#Requirement Packages  
 Levenshtein      V0.21.1  
 PyAudio          V0.2.13  
 PyQt6            V6.5.2  
@@ -42,11 +42,14 @@ wheel            V0.41.2
 To install all the above packages run the following commands in your terminal:-  
 pip install pyqt6  
 pip install pyqt6-tools  
-pip intsall pyside6  
+pip install pyside6  
 pip install pyaudio  
 pip install SpeechRecognition  
 pip install appopener  
-pip install psutil  
-pip install python-Levenshtein  
+# pip install psutil  
+pip install python-Levenshtein   to fasten fuzzywuzzy  
 pip install fuzzywuzzy  
 pip install pandas
+
+pip install pywhatkit
+pip install googlesearch-python

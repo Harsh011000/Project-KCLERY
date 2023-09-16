@@ -1,6 +1,4 @@
 import speech_recognition as sr
-
-
 def lang_process():
     # Create a recognizer instance
     recognizer = sr.Recognizer()
