@@ -109,10 +109,13 @@ def response(text):
         return array
     arr = text.split(" ")
 
-    if arr[0] == "set" and (arr[2] == "=" or arr[2] == "equal" or arr[2] == "equals"):
-        flag = 5
-        array = [flag, text]
-        return array
+    try:
+        if arr[0] == "set" and (arr[2] == "=" or arr[2] == "equal" or arr[2] == "equals"):
+            flag = 5
+            array = [flag, text]
+            return array
+    except:
+        pass
     dir_arr=dirct_chk(text)
     if dir_arr!=None:
         return dir_arr
