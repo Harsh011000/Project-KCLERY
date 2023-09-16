@@ -3,6 +3,7 @@ from fuzzywuzzy import fuzz
 import os
 import difflib
 import pandas as pd
+import pywhatkit as kit
 
 Open_keywords = [
     "open",
@@ -34,8 +35,11 @@ close_keywords = [
     "halt",
     "abort",
 ]
+Search_words = ["search",
+                "research",
+                "find"]
 
-stop_words = [
+Useless_words = [
     "and",
     "but",
     "or",
@@ -67,8 +71,8 @@ apps = give_appnames()
 
 drive_list = ['drive c', 'drive d', 'drive e', 'drive f', 'drive g', 'drive h', 'drive i', 'drive j', 'drive k',
               'drive l', 'drive m', 'drive n', 'drive o', 'drive p', 'drive q', 'drive r', 'drive s', 'drive t',
-              'drive u', 'drive v', 'drive w', 'drive x', 'drive y', 'drive z'
-    , 'c drive', 'd drive', 'e drive', 'f drive', 'g drive', 'h drive', 'i drive', 'j drive', 'k drive', 'l drive',
+              'drive u', 'drive v', 'drive w', 'drive x', 'drive y', 'drive z' ,
+              'c drive', 'd drive', 'e drive', 'f drive', 'g drive', 'h drive', 'i drive', 'j drive', 'k drive', 'l drive',
               'm drive', 'n drive', 'o drive', 'p drive', 'q drive', 'r drive', 's drive', 't drive', 'u drive',
               'v drive', 'w drive', 'x drive', 'y drive', 'z drive',
               'disk c', 'disk d', 'disk e', 'disk f', 'disk g', 'disk h', 'disk i', 'disk j', 'disk k', 'disk l',
@@ -78,7 +82,7 @@ drive_list = ['drive c', 'drive d', 'drive e', 'drive f', 'drive g', 'drive h', 
               'm disk', 'n disk', 'o disk', 'p disk', 'q disk', 'r disk', 's disk', 't disk', 'u disk', 'v disk',
               'w disk', 'x disk', 'y disk', 'z disk']
 
-abs_path = ""
+abs_path = ""   #empty string to store path
 g_dir = []
 username = os.environ.get("USERNAME")
 custom_dir = {"documents": "C:\\Users\\" + username + "\\documents",
@@ -87,8 +91,16 @@ custom_dir = {"documents": "C:\\Users\\" + username + "\\documents",
               "viedos": "C:\\Users\\" + username + "\\viedos", "desktop": "C:\\Users\\" + username + "\\desktop"}
 
 
+# 1= open 2= close 3= dir 4= search 5 =custom 6= muscic search
 def response(text):
     flag = 0
+    chflag=initi(text)
+    if (chflag==0):
+        flag="init"
+        array=[flag,"Hi "+username.capitalize()+"\n How can i help you?\n These are the keywords to interact with me--> \n 1. Open to play with file explorer"
+                    "and to open apps. \n 2. Close to close opened software \n 3. Set keywordname =/equal(s) task to set custom task. \n"
+                    " 4. Search to search on google."]
+        return array
     text = single_line(text)
     text = check_for_cust_comm(text)
     if os.path.isdir(text):
@@ -96,11 +108,23 @@ def response(text):
         array = [flag, text]
         return array
     arr = text.split(" ")
+
     if arr[0] == "set" and (arr[2] == "=" or arr[2] == "equal" or arr[2] == "equals"):
         flag = 5
         array = [flag, text]
         return array
-    for x in stop_words:
+
+    if (Search_words[0] in arr or Search_words[1] in arr or Search_words[2]  in arr):
+        if (Search_words[0] == arr[0] or Search_words[0] == arr[len(arr)-1] or Search_words[1] == arr[0] or Search_words[1] == arr[len(arr)-1] or Search_words[2] == arr[0] or Search_words[2] == arr[len(arr)-1]):
+            flag=4
+            array=[flag,text]
+            return array
+        else:
+            flag=-4
+            array=[flag,"Please enter search input properly"]
+            return array
+
+    for x in Useless_words:
         if x in arr:
             arr = [yy for yy in arr if yy != x]
 
@@ -135,6 +159,7 @@ def response(text):
     text = text.strip()
     respo = [flag, text]
     return respo
+
 
 
 def check_for_cust_comm(text):
@@ -197,7 +222,7 @@ def set_file(key, work):
         df.to_csv(file_name, mode="a", header=True, index=False)
 
 
-def dirct_rspo(text):
+def dirct_rspo(text):  #dfdfedfd
     global abs_path
     path = ""
     if os.path.isdir(text):
@@ -242,7 +267,7 @@ def opn_dir(path):
     os.startfile(os.path.realpath(path))
 
 
-def dir_con(path, text):
+def dir_con(path, text):   #fdfdf
     global abs_path
     global g_dir
 
@@ -311,7 +336,7 @@ def cls_app(text):
     close(text, match_closest=True, output=False)
 
 
-def crt_nm(text):
+def crt_nm(text):  #corerect name
     array = text.split(",")
     string = ""
 
@@ -322,3 +347,49 @@ def crt_nm(text):
             string += x + ","
     string = string[:-1]
     return string
+
+def filter_google(text):
+    text = text.strip()
+    googlearr = text.split(" ")
+    if (googlearr[0] == "search"):
+        googlearr.pop(0)
+    elif (googlearr[len(googlearr) - 1] == "search"):
+        googlearr.pop(len(googlearr) - 1)
+    elif (googlearr[0] == "research"):
+        googlearr.pop(0)
+    elif (googlearr[len(googlearr) - 1] == "research"):
+        googlearr.pop(len(googlearr) - 1)
+    elif (googlearr[0] == "find"):
+        googlearr.pop(0)
+    elif (googlearr[len(googlearr) - 1] == "find"):
+        googlearr.pop(len(googlearr) - 1)
+    else:
+        return text
+    searchString = ""
+    for i in googlearr:
+        searchString += i + " "
+    return searchString
+def clear_google(text):
+    text = text.strip()
+    gr = text.split(" ")
+    i = 0
+    i2 = 0
+    if ("google" in gr):
+        i = gr.index("google")
+        i2 = gr.index("on")
+    if (i == i2 + 1):
+        gr.pop(i)
+        gr.pop(i2)
+    Search=""
+    for i in gr:
+        Search += i + " "
+    return Search
+def search_google(text):
+    kit.search(text)
+
+def initi(text):
+    text.strip()
+    arrc=text.split(" ")
+    if (arrc[0]=="hi" or arrc[0]=="hello" or arrc[0]=="kcleary"):
+        return 0
+
