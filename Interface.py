@@ -11,6 +11,13 @@ import forMusic
 import MusicPorcessingFile
 from main_interface import Ui_MainWindow
 
+try:
+    from ctypes import windll  # Only exists on Windows.
+    myappid = 'DH Dash.KCLERY.1.0'
+    windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
+except ImportError:
+    pass
+
 
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def __init__(self, *args, obj=None, **kwargs):
@@ -320,8 +327,14 @@ class WorkerSignals(QObject):
     finish = pyqtSignal(list)
     Musicfinish = pyqtSignal(list)
 
-app = QtWidgets.QApplication(sys.argv)
+# app = QtWidgets.QApplication(sys.argv)
+#
+# window = MainWindow()
+# window.show()
+# app.exec()
+def main():
+    app = QtWidgets.QApplication(sys.argv)
 
-window = MainWindow()
-window.show()
-app.exec()
+    window = MainWindow()
+    window.show()
+    app.exec()

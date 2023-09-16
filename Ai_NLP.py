@@ -97,7 +97,7 @@ def response(text):
     chflag=initi(text)
     if (chflag==0):
         flag="init"
-        array=[flag,"Hi "+username.capitalize()+"\n How can i help you?\n These are the keywords to interact with me--> \n 1. Open to play with file explorer"
+        array=[flag,"Hi "+username.capitalize()+"\n How can i help you?\n These are the keywords to interact with me--> \n 1. Open to play with file explorer "
                     "and to open apps. \n 2. Close to close opened software \n 3. Set keywordname =/equal(s) task to set custom task. \n"
                     " 4. Search to search on google."]
         return array
