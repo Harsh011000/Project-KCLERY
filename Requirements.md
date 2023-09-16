@@ -45,11 +45,9 @@ pip install pyqt6-tools
 pip install pyside6  
 pip install pyaudio  
 pip install SpeechRecognition  
-pip install appopener  
-# pip install psutil  
-pip install python-Levenshtein   to fasten fuzzywuzzy  
+pip install appopener   
+pip install python-Levenshtein <!--to fasten fuzzywuzzy  -->  
 pip install fuzzywuzzy  
-pip install pandas
-
-pip install pywhatkit
+pip install pandas  
+pip install pywhatkit  
 pip install googlesearch-python

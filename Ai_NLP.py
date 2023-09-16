@@ -113,6 +113,9 @@ def response(text):
         flag = 5
         array = [flag, text]
         return array
+    dir_arr=dirct_chk(text)
+    if dir_arr!=None:
+        return dir_arr
 
     if (Search_words[0] in arr or Search_words[1] in arr or Search_words[2]  in arr):
         if (Search_words[0] == arr[0] or Search_words[0] == arr[len(arr)-1] or Search_words[1] == arr[0] or Search_words[1] == arr[len(arr)-1] or Search_words[2] == arr[0] or Search_words[2] == arr[len(arr)-1]):
@@ -138,12 +141,12 @@ def response(text):
     for kll in arr:
         text += kll + " "
     text = text.strip()
-    for dr in drive_list:
-        if dr in text:
-            flag = 3
-            arr2 = [flag, text]
-
-            return arr2
+    # for dr in drive_list:
+    #     if dr in text:
+    #         flag = 3
+    #         arr2 = [flag, text]
+    #
+    #         return arr2
     for y in Open_keywords:
         if y in arr:
             flag = 1
@@ -162,6 +165,23 @@ def response(text):
 
 
 
+def dirct_chk(text):
+    arr=text.split(" ")
+    for x in Useless_words:
+        if x in arr:
+            arr = [yy for yy in arr if yy != x]
+
+
+    text = ""
+    for kll in arr:
+        text += kll + " "
+    text = text.strip()
+    for dr in drive_list:
+        if dr in text:
+            flag = 3
+            arr2 = [flag, text]
+
+            return arr2
 def check_for_cust_comm(text):
     if len(text.split(" ")) == 1:
 
