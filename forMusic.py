@@ -54,7 +54,7 @@ def musicSearch(musictext):
         array =[flag,"Please use mic button to do other tasks"]
         return array
     filteredarray=filtertext(musictext)
-    filteredarray.pop(len(filteredarray)-1)
+
     if (flag=="gsearch"):
         flag=randommusic()
     if (flag=="search"):
@@ -141,6 +141,9 @@ def gaana(text):
 def randommusic():
     flag = random.randint(1, 6)
     return flag
+# def removePlayer(text):
+#     arr=text.split(" ")
+#     if ("spotify" in arr or "apple" in arr or "gaana" in arr or "prime" in arr)
 def filtertext(text):
     array = text.split(" ")
     if ("search" in array):
@@ -167,4 +170,6 @@ def filtertext(text):
         array.remove("jio")
     if ("jiomusic" in array):
         array.remove("jiomusic")
+    if("on"==array[len(array)-1]):
+        array.remove("on")
     return array
