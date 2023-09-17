@@ -1,3 +1,4 @@
+import os
 import sys
 
 from PyQt6 import QtWidgets
@@ -11,6 +12,7 @@ import forMusic
 import MusicPorcessingFile
 from main_interface import Ui_MainWindow
 
+basedir = os.path.dirname(__file__)
 try:
     from ctypes import windll  # Only exists on Windows.
     myappid = 'DH Dash.KCLERY.1.0'
